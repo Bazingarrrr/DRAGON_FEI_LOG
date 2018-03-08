@@ -2,6 +2,8 @@
 #include "../include/GV.h"
 #include <easyx.h>
 
+extern int FLAG_MODE = 0;
+
 //ループで必ず行う３大処理
 int ProcessLoop(){
 	if(ProcessMessage()!=0)return -1;//プロセス処理がエラーなら-1を返す
@@ -28,6 +30,7 @@ void menu()
 	//solidrectangle(740, 340, 1030, 3);
 
 	int FLAG_WANYI = 1;
+	
 
 	while (FLAG_WANYI)
 	{
@@ -41,7 +44,7 @@ void menu()
 			{
 				cleardevice();
 				FLAG_WANYI = 0;
-
+				FLAG_MODE = 0;
 
 			}
 
@@ -58,7 +61,7 @@ void menu()
 			{
 				cleardevice();
 				FLAG_WANYI = 0;
-
+				FLAG_MODE = 1;
 
 			}
 		}
@@ -111,9 +114,10 @@ void menu()
 
 int WINAPI WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine,int nCmdShow){
 	
+	
 	menu();
 	closegraph();
-	ChangeWindowMode(TRUE);//ウィンドウモード
+	ChangeWindowMode(FLAG_MODE);//ウィンドウモード
 	if(DxLib_Init() == -1 || SetDrawScreen( DX_SCREEN_BACK )!=0) return -1;//初期化と裏画面化
 
 	while(ProcessLoop()==0){//メインループ
