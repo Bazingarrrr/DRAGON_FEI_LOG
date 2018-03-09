@@ -1,3 +1,5 @@
+//graph_ch();
+	GLOBAL void graph_ch();
 //menu
 	GLOBAL void menu();
 //boss_shot.cpp

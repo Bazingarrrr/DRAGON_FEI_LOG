@@ -19,7 +19,7 @@ void music_play(){
 
 void load_bgm(int flag){
 	char str[64];
-	sprintf(str,"../dat/music/%d_%d.ogg",stage,flag);
+	sprintf_s(str,"../dat/music/%d_%d.ogg",stage,flag);
 	area.bgm.handle=LoadSoundMem(str);
 }
 

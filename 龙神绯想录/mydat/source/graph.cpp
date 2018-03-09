@@ -112,7 +112,7 @@ void graph_boss(){
 		img_etc[7],FALSE);
 	else
 		DrawModiGraphFdF(
-		3,			2,
+		3,			2,// myo test
 		3+FMX*subx,	2,
 		3+FMX*subx,	8,
 		3,			8,

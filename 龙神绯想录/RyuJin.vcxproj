@@ -108,6 +108,7 @@
     <ClCompile Include="mydat\source\out_lazer.cpp" />
     <ClCompile Include="mydat\source\shot.cpp" />
     <ClCompile Include="mydat\source\shotH.cpp" />
+    <ClCompile Include="wanyi.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\DxDirectX.h" />
