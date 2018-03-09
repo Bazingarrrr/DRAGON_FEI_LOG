@@ -132,6 +132,7 @@ int WINAPI WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine,i
 				ini();
 				load_story();
 				func_state=100;
+				
 				break;
 			case 100://í èÌèàóù
 								
@@ -148,7 +149,27 @@ int WINAPI WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine,i
 				bgm_main();		 
 				if(boss.flag==0)
 					stage_count++;
+				i_char = 1;
 				break;
+			/*case 101://char_2∫≈
+
+				calc_ch();
+				ch_move();
+				cshot_main();
+				//enemy_main();
+				//boss_shot_main();
+				shot_main();
+				out_main();
+				effect_main();
+				calc_main();
+				graph_main();
+				//bgm_main();
+				if (boss.flag == 0)
+					stage_count++;
+				break;
+				i_char = 0;
+			*/
+
 			default:
 				printfDx("ïsñæÇ»func_state\n");
 				break;
