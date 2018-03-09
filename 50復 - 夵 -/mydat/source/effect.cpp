@@ -76,7 +76,7 @@ void calc_effect(){
                         effect[i].brt-=255/6;
                     effect[i].r+=0.12;
                     effect[i].cnt++;
-                    if(effect[i].cnt>=12 || ch.flag!=1)
+                    if(effect[i].cnt>=12 || ch[i_char].flag!=1)
                         effect[i].flag=0;
                     break;                
                 default:
@@ -142,8 +142,8 @@ void enter_bom(){
     bom.flag=1;
     bom.cnt=0;
     bom.knd=0;
-    ch.flag=0;
-    ch.mutekicnt=1;//無敵に
+    ch[i_char].flag=0;
+    ch[i_char].mutekicnt=1;//無敵に
     se_flag[14]=1;//キュイーン音
     //縦線
     if((k=search_effect())!=-1){
@@ -196,7 +196,7 @@ void enter_bom(){
 void bom_calc(){
     int n,k;
 	double shot_angle[4]={0,PI,PI/2,PI*1.5};//4発エフェクトが飛ぶ角度
-    if((ch.flag==0||ch.flag==1) && bom.flag==0){//キャラが通常か喰らいボム状態で、ボムがオフなら
+    if((ch[i_char].flag==0||ch[i_char].flag==1) && bom.flag==0){//キャラが通常か喰らいボム状態で、ボムがオフなら
         if(CheckStatePad(configpad.bom)==1){//ボムボタンが押されたら
             enter_bom();
         }
@@ -215,8 +215,8 @@ void bom_calc(){
                 effect[k].r=0.5;//大きさ
                 effect[k].eff=2;//αブレンド
                 effect[k].img=img_eff_bom[(bom.cnt/10)/3];//画像
-                effect[k].x=ch.x;//座標
-                effect[k].y=ch.y;
+                effect[k].x=ch[i_char].x;//座標
+                effect[k].y=ch[i_char].y;
             }
         }
         bom.cnt++;
@@ -234,8 +234,8 @@ void bom_calc(){
 
 void enter_crybom_effect(){
     int k;
-    if(ch.flag==1){
-        if(ch.cnt%2==0){
+    if(ch[i_char].flag==1){
+        if(ch[i_char].cnt%2==0){
             if((k=search_effect())!=-1){
                 effect[k].flag=1;
                 effect[k].cnt=0;
@@ -246,8 +246,8 @@ void enter_crybom_effect(){
                 effect[k].r=0;
                 effect[k].eff=2;
                 effect[k].img=img_del_effect[GetRand(4)];
-                effect[k].x=ch.x;
-                effect[k].y=ch.y;
+                effect[k].x=ch[i_char].x;
+                effect[k].y=ch[i_char].y;
             }
         }
     }

@@ -114,17 +114,17 @@ void menu()
 
 int WINAPI WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine,int nCmdShow){
 	
-	
+	i_char = 0;
 	menu();
 	closegraph();
-	ChangeWindowMode(FLAG_MODE);//僂傿儞僪僂儌乕僪
+	ChangeWindowMode(FLAG_MODE); // 改变窗口大小
 	if(DxLib_Init() == -1 || SetDrawScreen( DX_SCREEN_BACK )!=0) return -1;//弶婜壔偲棤夋柺壔
 
 	while(ProcessLoop()==0){//儊僀儞儖乕僾
 		music_ini();
 		switch(func_state){
 			case 0://弶夞偺傒擖傞張棟
-				load();		//僨乕僞儘乕僪
+				load();		//载入数据
 				first_ini();//弶夞偺弶婜壔
 				func_state=99;
 				break;
@@ -144,7 +144,7 @@ int WINAPI WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine,i
 				out_main();  	 
 				effect_main();   
 				calc_main();	 
-				graph_main();    
+				graph_main();
 				bgm_main();		 
 				if(boss.flag==0)
 					stage_count++;
@@ -155,7 +155,7 @@ int WINAPI WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine,i
 		}
 		music_play();			
 		fps_wait();				 
-		if(CheckStateKey(KEY_INPUT_ESCAPE)==1)break;//僄僗働乕僾偑擖椡偝傟偨傜僽儗僀僋
+		if(CheckStateKey(KEY_INPUT_ESCAPE)==1)	break;//僄僗働乕僾偑擖椡偝傟偨傜僽儗僀僋
 		ScreenFlip();//棤夋柺斀塮
 		count++;
 

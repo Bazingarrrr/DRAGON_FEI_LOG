@@ -16,7 +16,7 @@ void (*shot_bullet[SHOT_KND_MAX])(int) ={
 
 //n”Ô–Ú‚ÌƒVƒ‡ƒbƒg‚ğ“o˜^‚µ‚½“G‚Æ©‹@‚Æ‚ÌŠp“x‚ğ•Ô‚·
 double shotatan2(int n){
-	return atan2(ch.y-enemy[shot[n].num].y,ch.x-enemy[shot[n].num].x);
+	return atan2(ch[i_char].y-enemy[shot[n].num].y,ch[i_char].x-enemy[shot[n].num].x);
 }
 //À•W‰ñ“]
 //(x0,y0)‚©‚ç(mx,my)‚ğŠî€‚ÉangŠp‰ñ“]‚µ‚½Šp“x‚ğ(x,y)‚É‚¢‚ê‚é

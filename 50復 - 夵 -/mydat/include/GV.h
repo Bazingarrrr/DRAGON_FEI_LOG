@@ -40,7 +40,7 @@ GLOBAL int stage_title_count[STAGE_NUM];
 GLOBAL int color[20],font[20];//怓(41) 僼僅儞僩(44)
 
 //峔憿懱曄悢愰尵晹
-GLOBAL ch_t ch;			//僉儍儔僋僞僨乕僞愰尵
+GLOBAL ch_t ch[game_player_num];			//
 GLOBAL enemy_t enemy[ENEMY_MAX];//揋忣曬
 GLOBAL configpad_t configpad;//僐儞僼傿僌偱愝掕偟偨僉乕忣曬
 GLOBAL enemy_order_t enemy_order[ENEMY_ORDER_MAX];//揋偺弌尰忣曬
@@ -59,6 +59,10 @@ GLOBAL child_t child[CHILD_MAX];//抏枊偺敪幩埵抲偵昞帵偡傞僄僼僃僋僩
 GLOBAL stage_title_t stage_title;//僗僥乕僕僞僀僩儖
 GLOBAL item_t item[ITEM_MAX];//傾僀僥儉
 GLOBAL flash_t flash;//(42)
-GLOBAL area_t area;//偦偺僄儕傾偱帩偭偰偄傞僨乕僞(48)
-GLOBAL option_bb_t option_bb[2];//僆僾僔儑儞敪幩尦儃儞儃儞(49)
+GLOBAL area_t area;//
+GLOBAL option_bb_t option_bb[2];//
+
+
+//定义标识符
+GLOBAL int i_char;
 

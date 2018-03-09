@@ -65,10 +65,10 @@ void ini(){
 	memset(&area,0,sizeof(area_t));//(48)
 	memset(option_bb,0,sizeof(option_bb_t)*2);//(49)
 
-	ch.x=FMX/2;
-	ch.y=FMY*3/4;
-	ch.power=400;//初期パワー(41)
-	ch.num=5;//初期残機数(41)
+	ch[i_char].x=FMX/2;
+	ch[i_char].y=FMY*3/4;
+	ch[i_char].power=400;//初期パワー(41)
+	ch[i_char].num=5;//初期残機数(41)
 
 	stage_title.appear_cnt=stage_title_count[stage];
 	

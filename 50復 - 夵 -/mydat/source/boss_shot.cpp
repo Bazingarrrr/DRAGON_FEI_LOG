@@ -67,7 +67,7 @@ int search_lazer(){//‹ó‚«”Ô†‚ğ•Ô‚·
 	return -1;
 }
 double bossatan2(){//©‹@‚Æ“G‚Æ‚Ì¬‚·Šp“x
-	return atan2(ch.y-boss.y,ch.x-boss.x);
+	return atan2(ch[i_char].y-boss.y,ch[i_char].x-boss.x);
 }
 double bossatan3(int k,double x,double y){//w’èÀ•W‚Æ’e‚Æ‚Ì¬‚·Šp“x
 	return atan2(y-boss_shot.bullet[k].y,x-boss_shot.bullet[k].x);

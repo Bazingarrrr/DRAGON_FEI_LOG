@@ -56,5 +56,6 @@
 #define ITEM_INDRAW_RANGE 70
 //傾僀僥儉偺摉偨傝敾掕
 #define ITEM_HIT_BOX 20
-
+//定义游戏人数
+#define game_player_num 2
 #include "struct.h"

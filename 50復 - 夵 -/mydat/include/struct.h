@@ -1,17 +1,17 @@
 //僉儍儔僋僞乕偵娭偡傞峔憿懱
 typedef struct{
-	int flag;		//僼儔僌
-	int cnt;		//僇僂儞僞
-	int power;		//僷儚乕
-	int point;		//億僀儞僩
-	int score;		//僗僐傾
-	int num;		//巆婡悢
-	int mutekicnt;	//柍揋忬懺偲僇僂儞僩
-	int shot_mode;	//僔儑僢僩儌乕僪
-	int money;		//偍嬥
-	int img;
-	int slow;		//僗儘乕偐偳偆偐
-	double x,y;		//嵗昗
+	int flag;		//flag
+	int cnt;		//count
+	int power;		//炸弹数
+	int point;		//点数
+	int score;		//分数
+	int num;		//残机数
+	int mutekicnt;	//无敌状态 与 技术变量
+	int shot_mode;	//射击模式
+	int money;		//金钱
+	int img;		// 图像
+	int slow;		//是否缓缓移动？
+	double x,y;		//坐标
 	int shot_cnt;	//僔儑僢僩僇僂儞僩
 	int graze;		//僌儗僀僘(41)
 }ch_t;

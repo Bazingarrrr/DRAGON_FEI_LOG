@@ -137,14 +137,14 @@ void graph_ch(){
 	else
 		sx=30,sy=30+ny;//普通の位置に
 
-//	DrawRotaGraphFdF( ch.x-sx, ch.y+sy, 1.0f,  ang, img_chetc[2], TRUE );
-//	DrawRotaGraphFdF( ch.x+sx, ch.y+sy, 1.0f, -ang, img_chetc[2], TRUE );
+//	DrawRotaGraphFdF( ch[i_char].x-sx, ch[i_char].y+sy, 1.0f,  ang, img_chetc[2], TRUE );
+//	DrawRotaGraphFdF( ch[i_char].x+sx, ch[i_char].y+sy, 1.0f, -ang, img_chetc[2], TRUE );
 
-	if(ch.mutekicnt%2==0){//無敵中なら点滅
+	if(ch[i_char].mutekicnt%2==0){//無敵中なら点滅
 		//自機表示
-		DrawRotaGraphFdF(ch.x,ch.y,1.0f,0.0f,img_ch[0][ch.img],TRUE);
+		DrawRotaGraphFdF(ch[i_char].x,ch[i_char].y,1.0f,0.0f,img_ch[0][ch[i_char].img],TRUE);
 		if(CheckStatePad(configpad.slow)>0)//低速移動中なら当たり判定表示
-			DrawRotaGraphFdF( ch.x, ch.y, 1.0f, 2.0*PI*(count%120)/120, img_chetc[0], TRUE );
+			DrawRotaGraphFdF( ch[i_char].x, ch[i_char].y, 1.0f, 2.0*PI*(count%120)/120, img_chetc[0], TRUE );
 	}
 }
 
@@ -304,11 +304,11 @@ void graph_stage_title(){
 //スコアボード表示(41)
 void graph_board_states(){
 	int i;
-	int score=ch.score;
-	int power=ch.power;
-	int graze=ch.graze;
-	int point=ch.point;
-	int money=ch.money;
+	int score=ch[i_char].score;
+	int power=ch[i_char].power;
+	int graze=ch[i_char].graze;
+	int point=ch[i_char].point;
+	int money=ch[i_char].money;
 	
 	for(i=0;i<9;i++){//スコア表示
 		DrawRotaGraph(625-15*i,30,1.0f,0.0f,img_num[0][score%10],TRUE);
@@ -316,7 +316,7 @@ void graph_board_states(){
 		score/=10;
 	}
 	
-	for(i=0;i<ch.num;i++)//残機数表示
+	for(i=0;i<ch[i_char].num;i++)//残機数表示
 		DrawGraph(499+12*i,63,img_etc[8],TRUE);
 	DrawRotaGraph(547,91,0.9f,0.0f,img_num[0][power%10],TRUE);power/=10;
 	DrawRotaGraph(536,91,0.9f,0.0f,img_num[0][power%10],TRUE);power/=10;

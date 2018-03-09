@@ -27,7 +27,7 @@ void calc_stage_title(){
 //アイテムの吸収処理。
 void calc_item_indraw(int i){
 	double v = item[i].state ? 8 : 3;//state1ならスピード8、違うなら2
-	double angle=atan2(ch.y-item[i].y,ch.x-item[i].x);//自機への角度を計算して
+	double angle=atan2(ch[i_char].y-item[i].y,ch[i_char].x-item[i].x);//自機への角度を計算して
 	item[i].x += cos(angle)*v;
 	item[i].y += sin(angle)*v;
 }
@@ -37,10 +37,10 @@ void calc_item(){
 	for(int i=0;i<ITEM_MAX;i++){
 		if(item[i].flag>0){
 			if(item[i].state==0)
-				if(ch.y<ITEM_GET_BORDER_LINE)//吸収状態なら
+				if(ch[i_char].y<ITEM_GET_BORDER_LINE)//吸収状態なら
 					item[i].state=1;
 			if(item[i].state==0){//普通の状態なら
-				double x=ch.x-item[i].x,y=ch.y-item[i].y;
+				double x=ch[i_char].x-item[i].x,y=ch[i_char].y-item[i].y;
 				//低速状態で自機付近なら
 				if(CheckStatePad(configpad.slow)>0 &&
 						x*x+y*y<ITEM_INDRAW_RANGE*ITEM_INDRAW_RANGE){

@@ -67,7 +67,7 @@ int out_judge_cshot_boss(int i){
 int out_judge_enemyshot(int s,int n){
     if(shot[s].bullet[n].cnt>0){//ショットの軌道が１度でも計算されていたら
         if(out_judge(
-            shot[s].bullet[n].x,shot[s].bullet[n].y,ch.x,ch.y,
+            shot[s].bullet[n].x,shot[s].bullet[n].y,ch[i_char].x,ch[i_char].y,
             bullet_info[shot[s].bullet[n].knd].range,CRANGE,
             shot[s].bullet[n].spd,shot[s].bullet[n].angle
             )){
@@ -81,7 +81,7 @@ int out_judge_enemyshot(int s,int n){
 int out_judge_bossshot(int n){
     if(boss_shot.bullet[n].cnt>0){//ショットの軌道が１度でも計算されていたら
         if(out_judge(
-            boss_shot.bullet[n].x,boss_shot.bullet[n].y,ch.x,ch.y,
+            boss_shot.bullet[n].x,boss_shot.bullet[n].y,ch[i_char].x,ch[i_char].y,
             bullet_info[boss_shot.bullet[n].knd].range,CRANGE,
             boss_shot.bullet[n].spd,boss_shot.bullet[n].angle
             )){
@@ -131,7 +131,7 @@ void enter_enemy_item(int s){
 //キャラから出るアイテム
 void enter_char_item(){
 	int item_n[4]={4,4,4,4};
-	enter_item(ch.x, ch.y, item_n, 4);
+	enter_item(ch[i_char].x, ch[i_char].y, item_n, 4);
 }
 
 extern void enter_del_effect(int);
@@ -196,9 +196,9 @@ void cshot_and_enemy(){
 //敵ショットと自機との処理
 void enemyshot_and_ch(){
     int s,n;
-	if(ch.flag==0 && ch.mutekicnt==0 && out_lazer()==1){
-        ch.cnt=0;
-        ch.flag=1;
+	if(ch[i_char].flag==0 && ch[i_char].mutekicnt==0 && out_lazer()==1){
+        ch[i_char].cnt=0;
+        ch[i_char].flag=1;
         se_flag[3]=1;
 	}
     //雑魚敵のショット
@@ -212,9 +212,9 @@ void enemyshot_and_ch(){
 					}
                     if(out_judge_enemyshot(s,n)==1){//自機にその弾が接触していたら
                         shot[s].bullet[n].flag=0;//弾をオフ
-                        if(ch.flag==0 && ch.mutekicnt==0){
-                            ch.cnt=0;
-                            ch.flag=1;
+                        if(ch[i_char].flag==0 && ch[i_char].mutekicnt==0){
+                            ch[i_char].cnt=0;
+                            ch[i_char].flag=1;
                             se_flag[3]=1;
                         }
                     }
@@ -232,9 +232,9 @@ void enemyshot_and_ch(){
 				}
                 if(out_judge_bossshot(n)==1){//自機にその弾が接触していたら
                     boss_shot.bullet[n].flag=0;//弾をオフ
-                    if(ch.flag==0 && ch.mutekicnt==0){
-                        ch.cnt=0;
-                        ch.flag=1;
+                    if(ch[i_char].flag==0 && ch[i_char].mutekicnt==0){
+                        ch[i_char].cnt=0;
+                        ch[i_char].flag=1;
                         se_flag[3]=1;
                     }
                 }
@@ -249,11 +249,11 @@ void cbom_and_enemy(){
     if(bom.flag!=1)return;
     for(s=0;s<ENEMY_MAX;s++){//敵総数
         if(enemy[s].flag>0)//その敵がいれば
-            hit_enemy(s,ch.power/20);//ダメージを与える
+            hit_enemy(s,ch[i_char].power/20);//ダメージを与える
     }
     //ボスがいて、描画しないフラグがオフで、ショット中なら
     if(boss.flag==1 && boss.graph_flag==0 && boss.state==2)
-        hit_boss(ch.power/20);//喰らわす
+        hit_boss(ch[i_char].power/20);//喰らわす
 }
 
 //アイテムとの接触
@@ -261,20 +261,20 @@ void cbom_and_enemy(){
 void ch_and_item(){
 	for(int i=0;i<ITEM_MAX;i++){
 		if(item[i].flag>0){
-			double x=item[i].x-ch.x,y=item[i].y-ch.y;
+			double x=item[i].x-ch[i_char].x,y=item[i].y-ch[i_char].y;
 			if(x*x+y*y<ITEM_HIT_BOX*ITEM_HIT_BOX){
 				switch(item[i].knd){
-					case 0:	ch.power+=3; break;
-					case 1:	ch.point+=1; break;
-					case 2:	ch.score+=1; break;
-					case 3:	ch.money+=1; break;
-					case 4:	ch.power+=50;break;
-					case 5:	ch.money+=10;break;
+					case 0:	ch[i_char].power+=3; break;
+					case 1:	ch[i_char].point+=1; break;
+					case 2:	ch[i_char].score+=1; break;
+					case 3:	ch[i_char].money+=1; break;
+					case 4:	ch[i_char].power+=50;break;
+					case 5:	ch[i_char].money+=10;break;
 				}
-				if(ch.power>500)ch.power=500;
-				if(ch.point>9999)ch.point=9999;
-				if(ch.money>999999)ch.money=999999;
-				if(ch.score>999999999)ch.score=999999999;
+				if(ch[i_char].power>500)ch[i_char].power=500;
+				if(ch[i_char].point>9999)ch[i_char].point=9999;
+				if(ch[i_char].money>999999)ch[i_char].money=999999;
+				if(ch[i_char].score>999999999)ch[i_char].score=999999999;
 				item[i].flag=0;
 				se_flag[34]=1;
 			}

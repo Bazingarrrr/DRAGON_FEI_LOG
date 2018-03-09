@@ -117,7 +117,7 @@ int hitjudge_square_and_circle(pt_t pt[4], pt_t rpt, double r){
 
 int out_lazer(){
     int i,j;
-    pt_t sqrp[4],rpt={ch.x,ch.y};//長方形の4点と円の中心
+    pt_t sqrp[4],rpt={ch[i_char].x,ch[i_char].y};//長方形の4点と円の中心
     //レーザー分ループ
     for(i=0;i<LAZER_MAX;i++){
         //レーザーが登録されていて、当たり判定をする設定なら

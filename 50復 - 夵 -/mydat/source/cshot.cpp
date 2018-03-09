@@ -21,23 +21,23 @@ int search_cshot(){
 //通常ショット登録
 void ch0_shot_pattern(){
 	int k;
-	int n=cshot0num[ch.power<200?0:1];
+	int n=cshot0num[ch[i_char].power<200?0:1];
 	for(int i=0;i<n;i++){
 		if((k=search_cshot())!=-1){
 			cshot[k].flag=1;
 			cshot[k].cnt=0;
 			cshot[k].angle=-PI/2;
 			cshot[k].spd=20;
-			cshot[k].x=ch.x+cshot0pos_x[i];
-			cshot[k].y=ch.y+cshot0pos_y[i];
-			cshot[k].power= (n<2 ? 20 : 12) +ch.power/100;//2筋なら20,4筋なら12(50)
+			cshot[k].x=ch[i_char].x+cshot0pos_x[i];
+			cshot[k].y=ch[i_char].y+cshot0pos_y[i];
+			cshot[k].power= (n<2 ? 20 : 12) +ch[i_char].power/100;//2筋なら20,4筋なら12(50)
 			cshot[k].knd=0;
 			cshot[k].img=img_cshot[0];//画像番号代入(49)
 		}
 	}
 	se_flag[2]=1;//発射音オン
-	if(ch.power>=100){
-		for(int i=0;i<(ch.power<300?2:4);i++){
+	if(ch[i_char].power>=100){
+		for(int i=0;i<(ch[i_char].power<300?2:4);i++){
 			if((k=search_cshot())!=-1){
 				cshot[k].flag=1;
 				cshot[k].cnt=0;
@@ -56,23 +56,23 @@ void ch0_shot_pattern(){
 //低速通常ショット登録
 void ch1_shot_pattern(){
 	int k;
-	int n=cshot0num[ch.power<200?0:1];
+	int n=cshot0num[ch[i_char].power<200?0:1];
 	for(int i=0;i<n;i++){
 		if((k=search_cshot())!=-1){
 			cshot[k].flag=1;
 			cshot[k].cnt=0;
 			cshot[k].angle=-PI/2;
 			cshot[k].spd=20;
-			cshot[k].x=ch.x+cshot0pos_x[i]/3;//低速中なら位置を中心側へ
-			cshot[k].y=ch.y+cshot0pos_y[i]/2;
-			cshot[k].power= (n<2 ? 20 : 12) +ch.power/100;//2筋なら20,4筋なら12(50)
+			cshot[k].x=ch[i_char].x+cshot0pos_x[i]/3;//低速中なら位置を中心側へ
+			cshot[k].y=ch[i_char].y+cshot0pos_y[i]/2;
+			cshot[k].power= (n<2 ? 20 : 12) +ch[i_char].power/100;//2筋なら20,4筋なら12(50)
 			cshot[k].knd=0;
 			cshot[k].img=img_cshot[0];//画像番号代入(49)
 		}
 	}
 	se_flag[2]=1;
-	if(ch.power>=100){
-		for(int i=0;i<(ch.power<300?2:4);i++){
+	if(ch[i_char].power>=100){
+		for(int i=0;i<(ch[i_char].power<300?2:4);i++){
 			if((k=search_cshot())!=-1){
 				cshot[k].flag=1;
 				cshot[k].cnt=0;
@@ -90,15 +90,15 @@ void ch1_shot_pattern(){
 
 //オプションのぼんぼん計算
 void calc_option_bb(){
-	if(ch.power>=100){//パワー100以上ならオプションをつける
+	if(ch[i_char].power>=100){//パワー100以上ならオプションをつける
 		for(int i=0;i<2;i++){
 			if(CheckStatePad(configpad.slow)==0){//低速移動中じゃないなら
-				option_bb[i].x=ch.x+OPTION_X*(i==0 ? -1 : 1);
-				option_bb[i].y=ch.y+OPTION_Y+sin(PI2/150*option_bb[i].cnt)*20;
+				option_bb[i].x=ch[i_char].x+OPTION_X*(i==0 ? -1 : 1);
+				option_bb[i].y=ch[i_char].y+OPTION_Y+sin(PI2/150*option_bb[i].cnt)*20;
 			}
 			else{
-				option_bb[i].x=ch.x+OPTION_X/2*(i==0 ? -1 : 1);
-				option_bb[i].y=ch.y+OPTION_Y/2;
+				option_bb[i].x=ch[i_char].x+OPTION_X/2*(i==0 ? -1 : 1);
+				option_bb[i].y=ch[i_char].y+OPTION_Y/2;
 			}
 			option_bb[i].cnt++;
 		}
@@ -115,8 +115,8 @@ void calc_option_bb(){
 void enter_shot(){
 	//ショットボタンが押されていたら
 	if(CheckStatePad(configpad.shot)>0){
-		ch.shot_cnt++;
-		if(ch.shot_cnt%3==0){//3カウントに1回
+		ch[i_char].shot_cnt++;
+		if(ch[i_char].shot_cnt%3==0){//3カウントに1回
 			if(CheckStatePad(configpad.slow)>0)//低速移動中なら
 				ch1_shot_pattern();
 			else
@@ -124,7 +124,7 @@ void enter_shot(){
 		}
 	}
 	else
-		ch.shot_cnt=0;
+		ch[i_char].shot_cnt=0;
 }
 
 //一番近い敵を探して角度をセットする

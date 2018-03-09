@@ -1,3 +1,5 @@
+//menu
+	GLOBAL void menu();
 //boss_shot.cpp
 	GLOBAL void boss_shot_main();
 
