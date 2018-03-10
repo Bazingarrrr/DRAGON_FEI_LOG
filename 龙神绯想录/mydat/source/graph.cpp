@@ -139,10 +139,12 @@ void graph_ch(){
 
 //	DrawRotaGraphFdF( ch[i_char].x-sx, ch[i_char].y+sy, 1.0f,  ang, img_chetc[2], TRUE );
 //	DrawRotaGraphFdF( ch[i_char].x+sx, ch[i_char].y+sy, 1.0f, -ang, img_chetc[2], TRUE );
-
-	for (i_char = 0; i_char < game_player_num; i_char++) {
-
-		if (ch[i_char].mutekicnt % 2 == 0) {//無敵中なら点滅
+	switch (FLAG_SINGLE_DOUBLE)
+	{
+	case 1:
+		i_char = 0;
+		if (ch[i_char].mutekicnt % 2 == 0) 
+		{
 											//自機表示
 			DrawRotaGraphFdF(ch[i_char].x, ch[i_char].y, 1.0f, 0.0f, img_ch[0][ch[i_char].img], TRUE);
 			if (CheckStatePad(configpad[i_char].slow) > 0)//低速移動中なら当たり判定表示
@@ -150,8 +152,26 @@ void graph_ch(){
 
 
 		}
+		break;
+	case 2:
+		for (i_char = 0; i_char < game_player_num; i_char++)
+		{
+
+			if (ch[i_char].mutekicnt % 2 == 0) 
+			{
+											//自機表示
+				DrawRotaGraphFdF(ch[i_char].x, ch[i_char].y, 1.0f, 0.0f, img_ch[0][ch[i_char].img], TRUE);
+				if (CheckStatePad(configpad[i_char].slow) > 0)//低速移動中なら当たり判定表示
+				DrawRotaGraphFdF(ch[i_char].x, ch[i_char].y, 1.0f, 2.0*PI*(count % 120) / 120, img_chetc[0], TRUE);
+
+
+			}
+		}
+		i_char = 0;
+		break;
 	}
-	i_char = 0;
+
+
 }
 
 //自機ショット描画
