@@ -113,18 +113,40 @@ void calc_option_bb(){
 
 //僔儑僢僩搊榐晹
 void enter_shot(){
-	//僔儑僢僩儃僞儞偑墴偝傟偰偄偨傜
-	if(CheckStatePad(configpad[i_char].shot)>0){
-		ch[i_char].shot_cnt++;
-		if(ch[i_char].shot_cnt%3==0){//3僇僂儞僩偵1夞
-			if(CheckStatePad(configpad[i_char].slow)>0)//掅懍堏摦拞側傜
-				ch1_shot_pattern();
-			else
-				ch0_shot_pattern();
+	//按下射击按钮X键的时候
+	switch (FLAG_SINGLE_DOUBLE)
+	{
+	case 1:
+		i_char = 0;
+		if (CheckStatePad(configpad[i_char].shot) > 0) {
+			ch[i_char].shot_cnt++;
+			if (ch[i_char].shot_cnt % 3 == 0) {//3僇僂儞僩偵1夞
+				if (CheckStatePad(configpad[i_char].slow) > 0)//掅懍堏摦拞側傜
+					ch1_shot_pattern();
+				else
+					ch0_shot_pattern();
+			}
 		}
+		break;
+	case 2:
+		for (i_char = 0; i_char < game_player_num; i_char++)
+		{
+
+			if (CheckStatePad(configpad[i_char].shot) > 0) {
+				ch[i_char].shot_cnt++;
+				if (ch[i_char].shot_cnt % 3 == 0) {//3僇僂儞僩偵1夞
+					if (CheckStatePad(configpad[i_char].slow) > 0)//掅懍堏摦拞側傜
+						ch1_shot_pattern();
+					else
+						ch0_shot_pattern();
+				}
+			}
+			else
+				ch[i_char].shot_cnt = 0;
+		}
+		break;
 	}
-	else
-		ch[i_char].shot_cnt=0;
+	
 }
 
 //堦斣嬤偄揋傪扵偟偰妏搙傪僙僢僩偡傞

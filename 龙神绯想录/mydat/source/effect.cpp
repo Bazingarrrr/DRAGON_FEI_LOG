@@ -196,6 +196,26 @@ void enter_bom(){
 void bom_calc(){
     int n,k;
 	double shot_angle[4]={0,PI,PI/2,PI*1.5};//4発エフェクトが飛ぶ角度
+	switch (FLAG_SINGLE_DOUBLE)
+	{
+	case 1:
+		i_char = 0;
+		if ((ch[i_char].flag == 0 || ch[i_char].flag == 1) && bom.flag == 0) {//キャラが通常か喰らいボム状態で、ボムがオフなら
+			if (CheckStatePad(configpad[i_char].bom) == 1) {//ボムボタンが押されたら
+				enter_bom();
+			}
+		}
+		break;
+
+	case 2:
+		for (i_char = 0; i_char < game_player_num; i_char++)
+		if ((ch[i_char].flag == 0 || ch[i_char].flag == 1) && bom.flag == 0) {//キャラが通常か喰らいボム状態で、ボムがオフなら
+			if (CheckStatePad(configpad[i_char].bom) == 1) {//ボムボタンが押されたら
+				enter_bom();
+			}
+		}
+		break;
+	}
     if((ch[i_char].flag==0||ch[i_char].flag==1) && bom.flag==0){//キャラが通常か喰らいボム状態で、ボムがオフなら
         if(CheckStatePad(configpad[i_char].bom)==1){//ボムボタンが押されたら
             enter_bom();
