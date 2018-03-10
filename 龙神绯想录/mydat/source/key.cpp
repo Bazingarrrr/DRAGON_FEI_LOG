@@ -33,15 +33,39 @@ void GetHitPadStateAll(){
 		else				pad.key[i]=0;
 		mul*=2;
 	}
-	input_pad_or_key(&pad.key[configpad.left]	,CheckStateKey(KEY_INPUT_LEFT	 ));
-	input_pad_or_key(&pad.key[configpad.up]	    ,CheckStateKey(KEY_INPUT_UP	     ));
-	input_pad_or_key(&pad.key[configpad.right]  ,CheckStateKey(KEY_INPUT_RIGHT	 ));
-	input_pad_or_key(&pad.key[configpad.down]	,CheckStateKey(KEY_INPUT_DOWN	 ));
-	input_pad_or_key(&pad.key[configpad.shot]	,CheckStateKey(KEY_INPUT_Z	     ));
-	input_pad_or_key(&pad.key[configpad.bom]	,CheckStateKey(KEY_INPUT_X		 ));
-	input_pad_or_key(&pad.key[configpad.slow]	,CheckStateKey(KEY_INPUT_LSHIFT	 ));
-	input_pad_or_key(&pad.key[configpad.start]  ,CheckStateKey(KEY_INPUT_ESCAPE	 ));
-	input_pad_or_key(&pad.key[configpad.change] ,CheckStateKey(KEY_INPUT_LCONTROL));
+	input_pad_or_key(&pad.key[configpad[i_char].left]	,CheckStateKey(KEY_INPUT_LEFT	 ));
+	input_pad_or_key(&pad.key[configpad[i_char].up]	    ,CheckStateKey(KEY_INPUT_UP	     ));
+	input_pad_or_key(&pad.key[configpad[i_char].right]  ,CheckStateKey(KEY_INPUT_RIGHT	 ));
+	input_pad_or_key(&pad.key[configpad[i_char].down]	,CheckStateKey(KEY_INPUT_DOWN	 ));
+	input_pad_or_key(&pad.key[configpad[i_char].shot]	,CheckStateKey(KEY_INPUT_Z	     ));
+	input_pad_or_key(&pad.key[configpad[i_char].bom]	,CheckStateKey(KEY_INPUT_X		 ));
+	input_pad_or_key(&pad.key[configpad[i_char].slow]	,CheckStateKey(KEY_INPUT_LSHIFT	 ));
+	input_pad_or_key(&pad.key[configpad[i_char].start]  ,CheckStateKey(KEY_INPUT_ESCAPE	 ));
+	input_pad_or_key(&pad.key[configpad[i_char].change] ,CheckStateKey(KEY_INPUT_LCONTROL));
+	
+	/*		Double_player	first charactors' keystate
+	 *
+	 *input_pad_or_key(&pad.key[configpad[i_char].left]	,CheckStateKey(KEY_INPUT_A));
+	 *input_pad_or_key(&pad.key[configpad[i_char].up]	    ,CheckStateKey(KEY_INPUT_W	     ));
+	 *input_pad_or_key(&pad.key[configpad[i_char].right]  ,CheckStateKey(KEY_INPUT_D	 ));
+	 *input_pad_or_key(&pad.key[configpad[i_char].down]	,CheckStateKey(KEY_INPUT_S	 ));
+	 *input_pad_or_key(&pad.key[configpad[i_char].shot]	,CheckStateKey(KEY_INPUT_F	     ));
+	 *input_pad_or_key(&pad.key[configpad[i_char].bom]	,CheckStateKey(KEY_INPUT_G		 ));
+	 *input_pad_or_key(&pad.key[configpad[i_char].slow]	,CheckStateKey(KEY_INPUT_LSHIFT	 ));
+	 *input_pad_or_key(&pad.key[configpad[i_char].start]  ,CheckStateKey(KEY_INPUT_ESCAPE	 ));
+	 *input_pad_or_key(&pad.key[configpad[i_char].change] ,CheckStateKey(KEY_INPUT_LCONTROL));	
+	 *
+	 *	
+	 *		Double_player	second charactors' keystate
+	 *
+	 *input_pad_or_key(&pad.key[configpad[i_char].left]	,CheckStateKey(KEY_INPUT_LEFT));
+	 *input_pad_or_key(&pad.key[configpad[i_char].up]	    ,CheckStateKey(KEY_INPUT_UP));
+	 *input_pad_or_key(&pad.key[configpad[i_char].right]  ,CheckStateKey(KEY_INPUT_RIGHT ));
+	 *input_pad_or_key(&pad.key[configpad[i_char].down]	,CheckStateKey(KEY_INPUT_DOWN));
+	 *input_pad_or_key(&pad.key[configpad[i_char].shot]	,CheckStateKey(KEY_INPUT_K    ));
+	 *input_pad_or_key(&pad.key[configpad[i_char].bom]	,CheckStateKey(KEY_INPUT_L		 ));
+	 *input_pad_or_key(&pad.key[configpad[i_char].slow]	,CheckStateKey(KEY_INPUT_J	 ));
+	 */
 }
 
 //渡されたパッドキー番号の入力状態を返す。返り値が-1なら不正

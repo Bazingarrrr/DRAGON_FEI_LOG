@@ -825,7 +825,7 @@
 #define KEY_INPUT_TAB								(0x0F)				// TabÉLÅ[			D_DIK_TAB
 #define KEY_INPUT_RETURN							(0x1C)				// EnterÉLÅ[		D_DIK_RETURN
 
-#define KEY_INPUT_LSHIFT							(0x2A)				// ç∂ShiftÉLÅ[		D_DIK_LSHIFT
+#define KEY_INPUT_LSHIFT							(0x2A)				// ◊ÛShift√¸¡Ó		D_DIK_LSHIFT
 #define KEY_INPUT_RSHIFT							(0x36)				// âEShiftÉLÅ[		D_DIK_RSHIFT
 #define KEY_INPUT_LCONTROL							(0x1D)				// ç∂CtrlÉLÅ[		D_DIK_LCONTROL
 #define KEY_INPUT_RCONTROL							(0x9D)				// âECtrlÉLÅ[		D_DIK_RCONTROL

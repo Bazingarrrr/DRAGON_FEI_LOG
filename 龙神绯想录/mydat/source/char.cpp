@@ -18,8 +18,8 @@ void calc_ch(){
         ch[i_char].mutekicnt++;//無敵状態へ
     }
     if(ch[i_char].flag==2){//死んで浮上中なら
-        unsigned int push=CheckStatePad(configpad.left)+CheckStatePad(configpad.right)
-            +CheckStatePad(configpad.up)+CheckStatePad(configpad.down);
+        unsigned int push=CheckStatePad(configpad[i_char].left)+CheckStatePad(configpad[i_char].right)
+            +CheckStatePad(configpad[i_char].up)+CheckStatePad(configpad[i_char].down);
         ch[i_char].y-=1.5;//キャラを上に上げる
         //１秒以上か、キャラがある程度上にいて、何かおされたら
         if(ch[i_char].cnt>60 || (ch[i_char].y<FMY-20 && push)){
@@ -41,14 +41,14 @@ void ch_move(){
     double x,y,mx,my,naname=1;
     double move_x[4]={-4.0,4.0,0,0},move_y[4]={0,0,4.0,-4.0};
     int inputpad[4];
-    inputpad[0]=CheckStatePad(configpad.left); inputpad[1]=CheckStatePad(configpad.right);
-    inputpad[2]=CheckStatePad(configpad.down); inputpad[3]=CheckStatePad(configpad.up);
+    inputpad[0]=CheckStatePad(configpad[i_char].left); inputpad[1]=CheckStatePad(configpad[i_char].right);
+    inputpad[2]=CheckStatePad(configpad[i_char].down); inputpad[3]=CheckStatePad(configpad[i_char].up);
 
     if(ch[i_char].flag==1)return;//喰らいボム受付中は動かせない
 
-    if(CheckStatePad(configpad.left)>0)//左キーが押されていたら
+    if(CheckStatePad(configpad[i_char].left)>0)//左キーが押されていたら
         ch[i_char].img+=4*2;//画像を左向きに
-    else if(CheckStatePad(configpad.right)>0)//右キーが押されていたら
+    else if(CheckStatePad(configpad[i_char].right)>0)//右キーが押されていたら
         ch[i_char].img+=4*1;//画像を右向きに
 
     for(i=0;i<2;i++)//左右分
@@ -64,7 +64,7 @@ void ch_move(){
         if(inputpad[i]>0){//i方向のキーボード、パッドどちらかの入力があれば
             x=ch[i_char].x , y=ch[i_char].y;//今の座標をとりあえずx,yに格納
             mx=move_x[i];    my=move_y[i];//移動分をmx,myに代入
-            if(CheckStatePad(configpad.slow)>0){//低速移動なら
+            if(CheckStatePad(configpad[i_char].slow)>0){//低速移動なら
                 mx=move_x[i]/3;    my=move_y[i]/3;//移動スピードを1/3に
             }
             x+=mx/naname , y+=my/naname;//今の座標と移動分を足す

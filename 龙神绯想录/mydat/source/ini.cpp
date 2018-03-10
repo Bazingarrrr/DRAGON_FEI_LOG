@@ -8,15 +8,15 @@ void input_bullet_info(bullet_info_t *binfo,int size_x,int size_y,int col_num,do
 
 //ˆê”ÔÅ‰‚Ì‰Šú‰»
 void first_ini(){
-	configpad.down=0;
-	configpad.left=1;
-	configpad.right=2;
-	configpad.up=3;
-	configpad.bom=4;
-	configpad.shot=5;
-	configpad.slow=11;
-	configpad.start=13;
-	configpad.change=6;
+	configpad[i_char].down=0;
+	configpad[i_char].left=1;
+	configpad[i_char].right=2;
+	configpad[i_char].up=3;
+	configpad[i_char].bom=4;
+	configpad[i_char].shot=5;
+	configpad[i_char].slow=11;
+	configpad[i_char].start=13;
+	configpad[i_char].change=6;
 
 	stage=0;
 	stage_title_count[0]=200;

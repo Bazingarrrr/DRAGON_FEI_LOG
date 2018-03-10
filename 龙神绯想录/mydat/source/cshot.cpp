@@ -92,7 +92,7 @@ void ch1_shot_pattern(){
 void calc_option_bb(){
 	if(ch[i_char].power>=100){//パワー100以上ならオプションをつける
 		for(int i=0;i<2;i++){
-			if(CheckStatePad(configpad.slow)==0){//低速移動中じゃないなら
+			if(CheckStatePad(configpad[i_char].slow)==0){//低速移動中じゃないなら
 				option_bb[i].x=ch[i_char].x+OPTION_X*(i==0 ? -1 : 1);
 				option_bb[i].y=ch[i_char].y+OPTION_Y+sin(PI2/150*option_bb[i].cnt)*20;
 			}
@@ -114,10 +114,10 @@ void calc_option_bb(){
 //ショット登録部
 void enter_shot(){
 	//ショットボタンが押されていたら
-	if(CheckStatePad(configpad.shot)>0){
+	if(CheckStatePad(configpad[i_char].shot)>0){
 		ch[i_char].shot_cnt++;
 		if(ch[i_char].shot_cnt%3==0){//3カウントに1回
-			if(CheckStatePad(configpad.slow)>0)//低速移動中なら
+			if(CheckStatePad(configpad[i_char].slow)>0)//低速移動中なら
 				ch1_shot_pattern();
 			else
 				ch0_shot_pattern();

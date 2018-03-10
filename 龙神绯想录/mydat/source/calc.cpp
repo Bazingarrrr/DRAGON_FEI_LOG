@@ -42,7 +42,7 @@ void calc_item(){
 			if(item[i].state==0){//•’Ê‚Ìó‘Ô‚È‚ç
 				double x=ch[i_char].x-item[i].x,y=ch[i_char].y-item[i].y;
 				//’á‘¬ó‘Ô‚ÅŽ©‹@•t‹ß‚È‚ç
-				if(CheckStatePad(configpad.slow)>0 &&
+				if(CheckStatePad(configpad[i_char].slow)>0 &&
 						x*x+y*y<ITEM_INDRAW_RANGE*ITEM_INDRAW_RANGE){
 					calc_item_indraw(i);//‹zŽû
 				}

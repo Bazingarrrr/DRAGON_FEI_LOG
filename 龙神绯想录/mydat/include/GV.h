@@ -42,7 +42,7 @@ GLOBAL int color[20],font[20];//色(41) フォント(44)
 //構造体変数宣言部
 GLOBAL ch_t ch[game_player_num];			//
 GLOBAL enemy_t enemy[ENEMY_MAX];//敵情報
-GLOBAL configpad_t configpad;//コンフィグで設定したキー情報
+GLOBAL configpad_t configpad[game_player_num];//コンフィグで設定したキー情報
 GLOBAL enemy_order_t enemy_order[ENEMY_ORDER_MAX];//敵の出現情報
 GLOBAL shot_t shot[SHOT_MAX];//ショット情報
 GLOBAL boss_shot_t boss_shot;//ボスショット情報

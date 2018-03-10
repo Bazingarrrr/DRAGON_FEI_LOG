@@ -8,8 +8,8 @@ extern int FLAG_MODE = 0;
 int ProcessLoop(){
 	if(ProcessMessage()!=0)return -1;//僾儘僙僗張棟偑僄儔乕側傜-1傪曉偡
 	if(ClearDrawScreen()!=0)return -1;//夋柺僋儕傾張棟偑僄儔乕側傜-1傪曉偡
-	GetHitKeyStateAll_2();//尰嵼偺僉乕擖椡張棟傪峴偆
-	GetHitPadStateAll();  //尰嵼偺僷僢僪擖椡張棟傪峴偆
+	GetHitKeyStateAll_2();//进行当前键盘按键的处理
+	GetHitPadStateAll();  //手柄输入的处理
 	return 0;
 }
 
@@ -38,21 +38,22 @@ int WINAPI WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine,i
 				
 				break;
 			case 100://捠忢張棟
-								
-				calc_ch();       
-				ch_move();       
-				cshot_main();    
-				enemy_main();	 
-				boss_shot_main();
-				shot_main();	 
-				out_main();  	 
-				effect_main();   
-				calc_main();	 
-				graph_main();
-				bgm_main();		 
-				if(boss.flag==0)
-					stage_count++;
-				i_char = 1;
+				
+				//for (i_char = 0; i_char < game_player_num - 1; i_char++) {
+					calc_ch();	//	角色计算
+					ch_move();	//	角色移动
+					cshot_main();
+					enemy_main();
+					boss_shot_main();
+					shot_main();
+					out_main();
+					effect_main();
+					calc_main();
+					graph_main();
+					bgm_main();
+					if (boss.flag == 0)
+						stage_count++;
+				//i_char = 0;
 				break;
 			/*case 101://char_2号
 
@@ -74,7 +75,7 @@ int WINAPI WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine,i
 			*/
 
 			default:
-				printfDx("晄柧側func_state\n");
+				printfDx("错误的func_state\n");
 				break;
 		}
 		music_play();			

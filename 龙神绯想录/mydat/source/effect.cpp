@@ -197,7 +197,7 @@ void bom_calc(){
     int n,k;
 	double shot_angle[4]={0,PI,PI/2,PI*1.5};//4発エフェクトが飛ぶ角度
     if((ch[i_char].flag==0||ch[i_char].flag==1) && bom.flag==0){//キャラが通常か喰らいボム状態で、ボムがオフなら
-        if(CheckStatePad(configpad.bom)==1){//ボムボタンが押されたら
+        if(CheckStatePad(configpad[i_char].bom)==1){//ボムボタンが押されたら
             enter_bom();
         }
     }

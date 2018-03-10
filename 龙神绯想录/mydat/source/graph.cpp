@@ -94,7 +94,7 @@ void graph_boss_effect(){
 }
 
 void graph_boss(){
-	int i;
+	//int i;
 	if(boss.flag==0)return;
 	graph_boss_effect();
 	DrawRotaGraphFdF(boss.dx,boss.dy,
@@ -112,7 +112,7 @@ void graph_boss(){
 		img_etc[7],FALSE);
 	else
 		DrawModiGraphFdF(
-		3,			2,// myo test
+		3,			2,
 		3+FMX*subx,	2,
 		3+FMX*subx,	8,
 		3,			8,
@@ -132,7 +132,7 @@ void graph_boss(){
 void graph_ch(){
 	double sx,sy,ny=(sin(2.0*PI*(count%50)/50)*3),ang=2.0*PI*(count%120)/120;
 
-	if(CheckStatePad(configpad.slow)>0)//低速移動中なら
+	if(CheckStatePad(configpad[i_char].slow)>0)//低速移動中なら
 		sx=15,sy=15+ny;//引き寄せる
 	else
 		sx=30,sy=30+ny;//普通の位置に
@@ -140,16 +140,18 @@ void graph_ch(){
 //	DrawRotaGraphFdF( ch[i_char].x-sx, ch[i_char].y+sy, 1.0f,  ang, img_chetc[2], TRUE );
 //	DrawRotaGraphFdF( ch[i_char].x+sx, ch[i_char].y+sy, 1.0f, -ang, img_chetc[2], TRUE );
 
-	for (i_char = 0; i_char < game_player_num; i_char++)
-	{
+	for (i_char = 0; i_char < game_player_num; i_char++) {
+
 		if (ch[i_char].mutekicnt % 2 == 0) {//無敵中なら点滅
 											//自機表示
 			DrawRotaGraphFdF(ch[i_char].x, ch[i_char].y, 1.0f, 0.0f, img_ch[0][ch[i_char].img], TRUE);
-			if (CheckStatePad(configpad.slow)>0)//低速移動中なら当たり判定表示
+			if (CheckStatePad(configpad[i_char].slow) > 0)//低速移動中なら当たり判定表示
 				DrawRotaGraphFdF(ch[i_char].x, ch[i_char].y, 1.0f, 2.0*PI*(count % 120) / 120, img_chetc[0], TRUE);
+
+
+		}
 	}
-	
-	}
+	i_char = 0;
 }
 
 //自機ショット描画
