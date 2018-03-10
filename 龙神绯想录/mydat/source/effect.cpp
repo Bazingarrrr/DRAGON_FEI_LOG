@@ -13,78 +13,160 @@ int search_effect(){
 
 //ƒGƒtƒFƒNƒg‚ğŒvZ‚·‚é
 void calc_effect(){
-    for(int i=0;i<EFFECT_MAX;i++){
-        if(effect[i].flag>0){//ƒGƒtƒFƒNƒg‚ª“o˜^‚³‚ê‚Ä‚¢‚½‚ç
-            effect[i].x+=cos(effect[i].mvang)*effect[i].spd;
-            effect[i].y+=sin(effect[i].mvang)*effect[i].spd;
-            switch(effect[i].knd){//ƒGƒtƒFƒNƒg‚Ìí—Ş‚É‚æ‚Á‚Ä•ªŠò
-                case 0://“G‚ÌÁ–ÅƒGƒtƒFƒNƒg
-                    effect[i].cnt++;
-                    effect[i].r+=0.08;//ƒGƒtƒFƒNƒg‚Ì‘å‚«‚³‚ğ’iX‘å‚«‚­‚·‚é
-                    if(effect[i].cnt>10)//10ƒJƒEƒ“ƒgˆÈã‚É‚È‚Á‚½‚ç
-                        effect[i].brt-=25;//–¾‚é‚³‚ğ­‚È‚­‚·‚é
-                    if(effect[i].cnt>20)//20ƒJƒEƒ“ƒgˆÈã‚É‚È‚Á‚½‚ç
-                        effect[i].flag=0;//Á‚·
-                    break;
-                case 1://ƒ{ƒ€‚ÌƒGƒtƒFƒNƒg
-                    //ƒXƒs[ƒhŒvZ
-                    if(effect[i].cnt<60)
-                        effect[i].spd-=(0.2+effect[i].cnt*effect[i].cnt/3000.0);
-                    if(effect[i].cnt==60){
-                        effect[i].spd=0;
-                        se_flag[15]=1;
-						enter_dn(11,20);//(45)
-                    }
-                    //–¾‚é‚³‚Æ‘å‚«‚³ŒvZ
-                    effect[i].r+=0.015;
-                    if(effect[i].cnt<51)
-                        effect[i].brt+=5;
-                    if(effect[i].cnt>=60){
-                        effect[i].r+=0.04;
-                        effect[i].brt-=255/30.0;
-                    }
-                    //ƒJƒEƒ“ƒgƒAƒbƒv‚ÆÁ‹ŒvZ
-                    effect[i].cnt++;
-                    if(effect[i].cnt>=90)
-                        effect[i].flag=0;
-                    break;
-                case 2://ƒ{ƒ€ƒGƒtƒFƒNƒgiƒLƒƒƒ‰j
-                    //–¾‚é‚³ŒvZ
-                    if(effect[i].cnt<51)
-                        effect[i].brt+=4;
-                    if(effect[i].cnt>130-51)
-                        effect[i].brt-=4;
-                    //ƒJƒEƒ“ƒgƒAƒbƒv‚ÆÁ‹ŒvZ
-                    effect[i].cnt++;
-                    if(effect[i].cnt>=130)
-                        effect[i].flag=0;
-                    break;
-                case 3://ƒ{ƒ€‚ÌƒGƒtƒFƒNƒgiƒ‰ƒCƒ“j
-                    //–¾‚é‚³ŒvZ
-                    if(effect[i].cnt<51)
-                        effect[i].brt+=2;
-                    if(effect[i].cnt>130-51)
-                        effect[i].brt-=2;
-                    //ƒJƒEƒ“ƒgƒAƒbƒv‚ÆÁ‹ŒvZ
-                    effect[i].cnt++;
-                    if(effect[i].cnt>=130)
-                        effect[i].flag=0;
-                    break;                
-                case 4://‹ò‚ç‚¢ƒ{ƒ€ƒGƒtƒFƒNƒg
-                    //–¾‚é‚³ŒvZ
-                    if(effect[i].cnt>=6)
-                        effect[i].brt-=255/6;
-                    effect[i].r+=0.12;
-                    effect[i].cnt++;
-                    if(effect[i].cnt>=12 || ch[i_char].flag!=1)
-                        effect[i].flag=0;
-                    break;                
-                default:
-                    printfDx("effectİ’èƒGƒ‰[\n");
-                    break;
-            }
-        }
-    }
+	switch (FLAG_SINGLE_DOUBLE)
+	{
+	case 1:
+		for (int i = 0; i<EFFECT_MAX; i++) {
+			if (effect[i].flag>0) {//ƒGƒtƒFƒNƒg‚ª“o˜^‚³‚ê‚Ä‚¢‚½‚ç
+				effect[i].x += cos(effect[i].mvang)*effect[i].spd;
+				effect[i].y += sin(effect[i].mvang)*effect[i].spd;
+				switch (effect[i].knd) {//ƒGƒtƒFƒNƒg‚Ìí—Ş‚É‚æ‚Á‚Ä•ªŠò
+				case 0://“G‚ÌÁ–ÅƒGƒtƒFƒNƒg
+					effect[i].cnt++;
+					effect[i].r += 0.08;//ƒGƒtƒFƒNƒg‚Ì‘å‚«‚³‚ğ’iX‘å‚«‚­‚·‚é
+					if (effect[i].cnt>10)//10ƒJƒEƒ“ƒgˆÈã‚É‚È‚Á‚½‚ç
+						effect[i].brt -= 25;//–¾‚é‚³‚ğ­‚È‚­‚·‚é
+					if (effect[i].cnt>20)//20ƒJƒEƒ“ƒgˆÈã‚É‚È‚Á‚½‚ç
+						effect[i].flag = 0;//Á‚·
+					break;
+				case 1://ƒ{ƒ€‚ÌƒGƒtƒFƒNƒg
+					   //ƒXƒs[ƒhŒvZ
+					if (effect[i].cnt<60)
+						effect[i].spd -= (0.2 + effect[i].cnt*effect[i].cnt / 3000.0);
+					if (effect[i].cnt == 60) {
+						effect[i].spd = 0;
+						se_flag[15] = 1;
+						enter_dn(11, 20);//(45)
+					}
+					//–¾‚é‚³‚Æ‘å‚«‚³ŒvZ
+					effect[i].r += 0.015;
+					if (effect[i].cnt<51)
+						effect[i].brt += 5;
+					if (effect[i].cnt >= 60) {
+						effect[i].r += 0.04;
+						effect[i].brt -= 255 / 30.0;
+					}
+					//ƒJƒEƒ“ƒgƒAƒbƒv‚ÆÁ‹ŒvZ
+					effect[i].cnt++;
+					if (effect[i].cnt >= 90)
+						effect[i].flag = 0;
+					break;
+				case 2://ƒ{ƒ€ƒGƒtƒFƒNƒgiƒLƒƒƒ‰j
+					   //–¾‚é‚³ŒvZ
+					if (effect[i].cnt<51)
+						effect[i].brt += 4;
+					if (effect[i].cnt>130 - 51)
+						effect[i].brt -= 4;
+					//ƒJƒEƒ“ƒgƒAƒbƒv‚ÆÁ‹ŒvZ
+					effect[i].cnt++;
+					if (effect[i].cnt >= 130)
+						effect[i].flag = 0;
+					break;
+				case 3://ƒ{ƒ€‚ÌƒGƒtƒFƒNƒgiƒ‰ƒCƒ“j
+					   //–¾‚é‚³ŒvZ
+					if (effect[i].cnt<51)
+						effect[i].brt += 2;
+					if (effect[i].cnt>130 - 51)
+						effect[i].brt -= 2;
+					//ƒJƒEƒ“ƒgƒAƒbƒv‚ÆÁ‹ŒvZ
+					effect[i].cnt++;
+					if (effect[i].cnt >= 130)
+						effect[i].flag = 0;
+					break;
+				case 4://‹ò‚ç‚¢ƒ{ƒ€ƒGƒtƒFƒNƒg
+					   //–¾‚é‚³ŒvZ
+					if (effect[i].cnt >= 6)
+						effect[i].brt -= 255 / 6;
+					effect[i].r += 0.12;
+					effect[i].cnt++;
+					if (effect[i].cnt >= 12 || ch[i_char].flag != 1)
+						effect[i].flag = 0;
+					break;
+				default:
+					printfDx("effectİ’èƒGƒ‰[\n");
+					break;
+				}
+			}
+		}
+		break;
+	case 2:
+		for (int i = 0; i<EFFECT_MAX; i++) {
+			if (effect[i].flag>0) {//ƒGƒtƒFƒNƒg‚ª“o˜^‚³‚ê‚Ä‚¢‚½‚ç
+				effect[i].x += cos(effect[i].mvang)*effect[i].spd;
+				effect[i].y += sin(effect[i].mvang)*effect[i].spd;
+				switch (effect[i].knd) {//ƒGƒtƒFƒNƒg‚Ìí—Ş‚É‚æ‚Á‚Ä•ªŠò
+				case 0://“G‚ÌÁ–ÅƒGƒtƒFƒNƒg
+					effect[i].cnt++;
+					effect[i].r += 0.08;//ƒGƒtƒFƒNƒg‚Ì‘å‚«‚³‚ğ’iX‘å‚«‚­‚·‚é
+					if (effect[i].cnt>10)//10ƒJƒEƒ“ƒgˆÈã‚É‚È‚Á‚½‚ç
+						effect[i].brt -= 25;//–¾‚é‚³‚ğ­‚È‚­‚·‚é
+					if (effect[i].cnt>20)//20ƒJƒEƒ“ƒgˆÈã‚É‚È‚Á‚½‚ç
+						effect[i].flag = 0;//Á‚·
+					break;
+				case 1://ƒ{ƒ€‚ÌƒGƒtƒFƒNƒg
+					   //ƒXƒs[ƒhŒvZ
+					if (effect[i].cnt<60)
+						effect[i].spd -= (0.2 + effect[i].cnt*effect[i].cnt / 3000.0);
+					if (effect[i].cnt == 60) {
+						effect[i].spd = 0;
+						se_flag[15] = 1;
+						enter_dn(11, 20);//(45)
+					}
+					//–¾‚é‚³‚Æ‘å‚«‚³ŒvZ
+					effect[i].r += 0.015;
+					if (effect[i].cnt<51)
+						effect[i].brt += 5;
+					if (effect[i].cnt >= 60) {
+						effect[i].r += 0.04;
+						effect[i].brt -= 255 / 30.0;
+					}
+					//ƒJƒEƒ“ƒgƒAƒbƒv‚ÆÁ‹ŒvZ
+					effect[i].cnt++;
+					if (effect[i].cnt >= 90)
+						effect[i].flag = 0;
+					break;
+				case 2://ƒ{ƒ€ƒGƒtƒFƒNƒgiƒLƒƒƒ‰j
+					   //–¾‚é‚³ŒvZ
+					if (effect[i].cnt<51)
+						effect[i].brt += 4;
+					if (effect[i].cnt>130 - 51)
+						effect[i].brt -= 4;
+					//ƒJƒEƒ“ƒgƒAƒbƒv‚ÆÁ‹ŒvZ
+					effect[i].cnt++;
+					if (effect[i].cnt >= 130)
+						effect[i].flag = 0;
+					break;
+				case 3://ƒ{ƒ€‚ÌƒGƒtƒFƒNƒgiƒ‰ƒCƒ“j
+					   //–¾‚é‚³ŒvZ
+					if (effect[i].cnt<51)
+						effect[i].brt += 2;
+					if (effect[i].cnt>130 - 51)
+						effect[i].brt -= 2;
+					//ƒJƒEƒ“ƒgƒAƒbƒv‚ÆÁ‹ŒvZ
+					effect[i].cnt++;
+					if (effect[i].cnt >= 130)
+						effect[i].flag = 0;
+					break;
+				case 4://‹ò‚ç‚¢ƒ{ƒ€ƒGƒtƒFƒNƒg
+					   //–¾‚é‚³ŒvZ
+					if (effect[i].cnt >= 6)
+						effect[i].brt -= 255 / 6;
+					effect[i].r += 0.12;
+					effect[i].cnt++;
+					for (i_char = 0; i_char < game_player_num; i_char++)
+						if (effect[i].cnt >= 12 || ch[i_char].flag != 1)
+							effect[i].flag = 0;
+					break;
+				default:
+					printfDx("effect³ö´í\n");
+					break;
+				}
+			}
+		}
+		break;
+
+	}
+ 
 }
 
 //Á–ÅƒGƒtƒFƒNƒg‚Ì“o˜^‹ó‚«”Ô†‚ğ’T‚·
@@ -142,11 +224,15 @@ void enter_bom(){
     bom.flag=1;
     bom.cnt=0;
     bom.knd=0;
-    ch[i_char].flag=0;
-    ch[i_char].mutekicnt=1;//–³“G‚É
+	for (i_char = 0; i_char < game_player_num; i_char++)
+	{
+		ch[i_char].flag = 0;
+		ch[i_char].mutekicnt = 1;//–³“G‚É
+	}
     se_flag[14]=1;//ƒLƒ…ƒC[ƒ“‰¹
     //cü
-    if((k=search_effect())!=-1){
+    if((k=search_effect())!=-1)
+	{
         effect[k].flag=1;
         effect[k].cnt=0;
         effect[k].knd=3;//ƒ{ƒ€‚Ìü‚ÌƒGƒtƒFƒNƒg

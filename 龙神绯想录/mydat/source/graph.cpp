@@ -131,7 +131,7 @@ void graph_boss(){
 //Ž©‹@•`‰æ
 void graph_ch(){
 	double sx,sy,ny=(sin(2.0*PI*(count%50)/50)*3),ang=2.0*PI*(count%120)/120;
-
+	for (i_char = 0; i_char < game_player_num; i_char++)
 	if(CheckStatePad(configpad[i_char].slow)>0)//’á‘¬ˆÚ“®’†‚È‚ç
 		sx=15,sy=15+ny;//ˆø‚«Šñ‚¹‚é
 	else

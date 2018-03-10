@@ -65,7 +65,8 @@ int out_judge_cshot_boss(int i){
 
 //自機と敵ショットが当たったかどうかを判定する
 int out_judge_enemyshot(int s,int n){
-    if(shot[s].bullet[n].cnt>0){//ショットの軌道が１度でも計算されていたら
+	for (i_char = 0; i_char < game_player_num; i_char++)
+	if(shot[s].bullet[n].cnt>0){//ショットの軌道が１度でも計算されていたら
         if(out_judge(
             shot[s].bullet[n].x,shot[s].bullet[n].y,ch[i_char].x,ch[i_char].y,
             bullet_info[shot[s].bullet[n].knd].range,CRANGE,
@@ -79,6 +80,7 @@ int out_judge_enemyshot(int s,int n){
 
 //自機とボスショットが当たったかどうかを判定する
 int out_judge_bossshot(int n){
+	for (i_char = 0; i_char < game_player_num; i_char++)
     if(boss_shot.bullet[n].cnt>0){//ショットの軌道が１度でも計算されていたら
         if(out_judge(
             boss_shot.bullet[n].x,boss_shot.bullet[n].y,ch[i_char].x,ch[i_char].y,
@@ -131,7 +133,8 @@ void enter_enemy_item(int s){
 //キャラから出るアイテム
 void enter_char_item(){
 	int item_n[4]={4,4,4,4};
-	enter_item(ch[i_char].x, ch[i_char].y, item_n, 4);
+	for(i_char = 0; i_char < game_player_num; i_char++)
+		enter_item(ch[i_char].x, ch[i_char].y, item_n, 4);
 }
 
 extern void enter_del_effect(int);
@@ -196,87 +199,97 @@ void cshot_and_enemy(){
 //敵ショットと自機との処理
 void enemyshot_and_ch(){
     int s,n;
-	if(ch[i_char].flag==0 && ch[i_char].mutekicnt==0 && out_lazer()==1){
-        ch[i_char].cnt=0;
-        ch[i_char].flag=1;
-        se_flag[3]=1;
-	}
-    //雑魚敵のショット
-    for(s=0;s<SHOT_MAX;s++){//敵ショット総数
-        if(shot[s].flag>0){//そのショットが登録されていたら
-            for(n=0;n<SHOT_BULLET_MAX;n++){//弾総数
-                if(shot[s].bullet[n].flag==1){//弾が登録されていたら
-					if(bom.flag!=0){
-						shot[s].bullet[n].flag=0;
+	for (i_char = 0; i_char < game_player_num; i_char++)
+	{
+		if (ch[i_char].flag == 0 && ch[i_char].mutekicnt == 0 && out_lazer() == 1) {
+			ch[i_char].cnt = 0;
+			ch[i_char].flag = 1;
+			se_flag[3] = 1;
+		}
+		//雑魚敵のショット
+		for (s = 0; s < SHOT_MAX; s++) {//敵ショット総数
+			if (shot[s].flag > 0) {//そのショットが登録されていたら
+				for (n = 0; n < SHOT_BULLET_MAX; n++) {//弾総数
+					if (shot[s].bullet[n].flag == 1) {//弾が登録されていたら
+						if (bom.flag != 0) {
+							shot[s].bullet[n].flag = 0;
+							continue;
+						}
+						if (out_judge_enemyshot(s, n) == 1) {//自機にその弾が接触していたら
+							shot[s].bullet[n].flag = 0;//弾をオフ
+							if (ch[i_char].flag == 0 && ch[i_char].mutekicnt == 0) {
+								ch[i_char].cnt = 0;
+								ch[i_char].flag = 1;
+								se_flag[3] = 1;
+							}
+						}
+					}
+				}
+			}
+		}
+		//ボスのショット
+		if (boss_shot.flag > 0) {//そのショットが登録されていたら
+			for (n = 0; n < BOSS_BULLET_MAX; n++) {//弾総数
+				if (boss_shot.bullet[n].flag == 1) {//弾が登録されていたら
+					if (bom.flag != 0) {
+						boss_shot.bullet[n].flag = 0;
 						continue;
 					}
-                    if(out_judge_enemyshot(s,n)==1){//自機にその弾が接触していたら
-                        shot[s].bullet[n].flag=0;//弾をオフ
-                        if(ch[i_char].flag==0 && ch[i_char].mutekicnt==0){
-                            ch[i_char].cnt=0;
-                            ch[i_char].flag=1;
-                            se_flag[3]=1;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    //ボスのショット
-    if(boss_shot.flag>0){//そのショットが登録されていたら
-        for(n=0;n<BOSS_BULLET_MAX;n++){//弾総数
-            if(boss_shot.bullet[n].flag==1){//弾が登録されていたら
-				if(bom.flag!=0){
-					boss_shot.bullet[n].flag=0;
-					continue;
+					if (out_judge_bossshot(n) == 1) {//自機にその弾が接触していたら
+						boss_shot.bullet[n].flag = 0;//弾をオフ
+						if (ch[i_char].flag == 0 && ch[i_char].mutekicnt == 0) {
+							ch[i_char].cnt = 0;
+							ch[i_char].flag = 1;
+							se_flag[3] = 1;
+						}
+					}
 				}
-                if(out_judge_bossshot(n)==1){//自機にその弾が接触していたら
-                    boss_shot.bullet[n].flag=0;//弾をオフ
-                    if(ch[i_char].flag==0 && ch[i_char].mutekicnt==0){
-                        ch[i_char].cnt=0;
-                        ch[i_char].flag=1;
-                        se_flag[3]=1;
-                    }
-                }
-            }
-        }
-    }
+			}
+		}
+	}
 }
 
 //ボムのダメージを敵に喰らわす
 void cbom_and_enemy(){
     int s;
-    if(bom.flag!=1)return;
-    for(s=0;s<ENEMY_MAX;s++){//敵総数
-        if(enemy[s].flag>0)//その敵がいれば
-            hit_enemy(s,ch[i_char].power/20);//ダメージを与える
-    }
-    //ボスがいて、描画しないフラグがオフで、ショット中なら
-    if(boss.flag==1 && boss.graph_flag==0 && boss.state==2)
-        hit_boss(ch[i_char].power/20);//喰らわす
+	for (i_char = 0; i_char < game_player_num; i_char++)
+	{
+		if (bom.flag != 1)return;
+		for (s = 0; s < ENEMY_MAX; s++) {//敵総数
+			if (enemy[s].flag > 0)//その敵がいれば
+				hit_enemy(s, ch[i_char].power / 20);//ダメージを与える
+		}
+		//ボスがいて、描画しないフラグがオフで、ショット中なら
+		if (boss.flag == 1 && boss.graph_flag == 0 && boss.state == 2)
+			hit_boss(ch[i_char].power / 20);//喰らわす
+	}
 }
 
 //アイテムとの接触
 //アイテム　0:小パワー 1:小点 2:弾点 3:小金 4:大パワー 5:大金
 void ch_and_item(){
-	for(int i=0;i<ITEM_MAX;i++){
-		if(item[i].flag>0){
-			double x=item[i].x-ch[i_char].x,y=item[i].y-ch[i_char].y;
-			if(x*x+y*y<ITEM_HIT_BOX*ITEM_HIT_BOX){
-				switch(item[i].knd){
-					case 0:	ch[i_char].power+=3; break;
-					case 1:	ch[i_char].point+=1; break;
-					case 2:	ch[i_char].score+=1; break;
-					case 3:	ch[i_char].money+=1; break;
-					case 4:	ch[i_char].power+=50;break;
-					case 5:	ch[i_char].money+=10;break;
+	for (i_char = 0; i_char < game_player_num; i_char++) {
+
+
+		for (int i = 0; i < ITEM_MAX; i++) {
+			if (item[i].flag > 0) {
+				double x = item[i].x - ch[i_char].x, y = item[i].y - ch[i_char].y;
+				if (x*x + y * y < ITEM_HIT_BOX*ITEM_HIT_BOX) {
+					switch (item[i].knd) {
+					case 0:	ch[i_char].power += 3; break;
+					case 1:	ch[i_char].point += 1; break;
+					case 2:	ch[i_char].score += 1; break;
+					case 3:	ch[i_char].money += 1; break;
+					case 4:	ch[i_char].power += 50; break;
+					case 5:	ch[i_char].money += 10; break;
+					}
+					if (ch[i_char].power > 500)ch[i_char].power = 500;
+					if (ch[i_char].point > 9999)ch[i_char].point = 9999;
+					if (ch[i_char].money > 999999)ch[i_char].money = 999999;
+					if (ch[i_char].score > 999999999)ch[i_char].score = 999999999;
+					item[i].flag = 0;
+					se_flag[34] = 1;
 				}
-				if(ch[i_char].power>500)ch[i_char].power=500;
-				if(ch[i_char].point>9999)ch[i_char].point=9999;
-				if(ch[i_char].money>999999)ch[i_char].money=999999;
-				if(ch[i_char].score>999999999)ch[i_char].score=999999999;
-				item[i].flag=0;
-				se_flag[34]=1;
 			}
 		}
 	}
