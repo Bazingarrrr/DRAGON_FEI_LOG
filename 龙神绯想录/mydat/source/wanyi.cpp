@@ -1,9 +1,12 @@
+#include "../include/GV.h"
 #include <easyx.h>
 
 extern int FLAG_MODE;
 
+
 void menu()
 {
+	FLAG_SINGLE_DOUBLE = 1;
 	initgraph(1280, 720);
 	//initgraph(1280,720 );
 
@@ -61,7 +64,13 @@ void menu()
 			if (m.uMsg == WM_LBUTTONDOWN)
 			{
 				cleardevice();
-				FLAG_WANYI = 0;
+				switch (FLAG_SINGLE_DOUBLE) {
+				
+				case 1:FLAG_SINGLE_DOUBLE = 2; break;
+				case 2:FLAG_SINGLE_DOUBLE = 1; break;
+				default: FLAG_SINGLE_DOUBLE = 0;
+				}
+			//TODO : ÌáÊ¾±ê·ûºÅ
 
 
 			}

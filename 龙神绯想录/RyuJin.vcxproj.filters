@@ -99,7 +99,7 @@
     <ClCompile Include="mydat\source\boss_shotH.cpp">
       <Filter>ソース ファイル\boss_shot\Hard</Filter>
     </ClCompile>
-    <ClCompile Include="wanyi.cpp">
+    <ClCompile Include="mydat\source\wanyi.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

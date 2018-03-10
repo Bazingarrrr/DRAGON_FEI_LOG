@@ -2,6 +2,8 @@
 #include "define.h"
 #include "math.h"
 
+//extern int FLAG_SINGLE_DOUBLE;
+
 #ifdef GLOBAL_INSTANCE
 #define GLOBAL
 #else
@@ -11,6 +13,7 @@
 #include "function.h"
 
 //夋憸梡曄悢愰尵晹
+
 GLOBAL int img_ch[2][12];	//僉儍儔僋僞夋憸12枃暘丂X2(曄恎梡)
 GLOBAL int img_chetc[10];	//僉儍儔僋僞偵娭偡傞懠偺夋憸
 GLOBAL int img_enemy[3][9];	//揋夋憸9枃暘
@@ -65,4 +68,4 @@ GLOBAL option_bb_t option_bb[2];//
 
 //定义标识符
 GLOBAL int i_char;
-
+GLOBAL int FLAG_SINGLE_DOUBLE;

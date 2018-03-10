@@ -1,3 +1,4 @@
+
 extern void boss_shot_bulletH000();
 extern void boss_shot_bulletH001();
 extern void boss_shot_bulletH002();
@@ -11,7 +12,7 @@ extern void boss_shot_bulletH009();
 extern void boss_shot_bulletH010();
 extern void boss_shot_bulletH011();
 
-void (*boss_shot_bullet[DANMAKU_MAX])() =
+void (*boss_shot_bullet[DANMAKU_MAX])()=
 {
 //中ボス
         boss_shot_bulletH000,//ノーマル
