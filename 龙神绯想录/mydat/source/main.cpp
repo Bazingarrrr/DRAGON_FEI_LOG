@@ -19,7 +19,7 @@ int WINAPI WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine,i
 	
 	i_char = 0;
 	menu();
-	closegraph();
+	
 	ChangeWindowMode(FLAG_MODE); // 改变窗口大小
 	if(DxLib_Init() == -1 || SetDrawScreen( DX_SCREEN_BACK )!=0) return -1;//弶婜壔偲棤夋柺壔
 
@@ -80,7 +80,7 @@ int WINAPI WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine,i
 		}
 		music_play();			
 		fps_wait();				 
-		if(CheckStateKey(KEY_INPUT_ESCAPE)==1)	break;//僄僗働乕僾偑擖椡偝傟偨傜僽儗僀僋
+		if(CheckStateKey(KEY_INPUT_F10)==1)	break;//按ESC键退出
 		ScreenFlip();//棤夋柺斀塮
 		count++;
 

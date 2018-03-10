@@ -1,5 +1,6 @@
 #include "../include/GV.h"
 #include <easyx.h>
+#include <string.h>
 
 extern int FLAG_MODE;
 
@@ -26,8 +27,10 @@ void menu()
 
 
 	while (FLAG_WANYI)
-	{
+	{	
 		FLAG_WANYI = 1;
+		
+		
 		m = GetMouseMsg();				// 判断是否按下鼠标
 		if (m.x >= 740 && m.x <= 1030 && m.y >= 340 && m.y <= 390)
 		{
@@ -37,7 +40,7 @@ void menu()
 			{
 				cleardevice();
 				FLAG_WANYI = 0;
-				FLAG_MODE = 0;
+				
 
 			}
 
@@ -53,8 +56,8 @@ void menu()
 			if (m.uMsg == WM_LBUTTONDOWN)
 			{
 				cleardevice();
-				FLAG_WANYI = 0;
-				FLAG_MODE = 1;
+				if (FLAG_MODE == 1)	FLAG_MODE = 0;
+				if(FLAG_MODE == 0)	FLAG_MODE = 1;
 
 			}
 		}
@@ -108,4 +111,5 @@ void menu()
 
 
 	}
+	closegraph();
 }
