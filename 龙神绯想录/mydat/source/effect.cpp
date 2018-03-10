@@ -216,61 +216,128 @@ void bom_calc(){
 		}
 		break;
 	}
-    if((ch[i_char].flag==0||ch[i_char].flag==1) && bom.flag==0){//キャラが通常か喰らいボム状態で、ボムがオフなら
-        if(CheckStatePad(configpad[i_char].bom)==1){//ボムボタンが押されたら
-            enter_bom();
-        }
-    }
-    if(bom.flag==1){//ボムが登録されていたら
-        if(bom.cnt%10==0){//1/6秒に１回
-            n=(bom.cnt/10);
-            if(n<4 && (k=search_effect())!=-1){
-                effect[k].flag=1;
-                effect[k].cnt=0;
-                effect[k].knd=1;//エフェクト番号１：ボムのエフェクト
-                effect[k].brt=0;
-                effect[k].ang=rang(PI);//画像の向きはランダム
-                effect[k].mvang=shot_angle[n]-PI/4;//飛ぶ方向
-                effect[k].spd=13+rang(2);//スピード
-                effect[k].r=0.5;//大きさ
-                effect[k].eff=2;//αブレンド
-                effect[k].img=img_eff_bom[(bom.cnt/10)/3];//画像
-                effect[k].x=ch[i_char].x;//座標
-                effect[k].y=ch[i_char].y;
-            }
-        }
-        bom.cnt++;
-        if(bom.cnt<40)
-            bright_set.brt=255-bom.cnt*5;//画面の明るさ設定(暗く)
-        if(bom.cnt>90)
-            bright_set.brt=255-40*5+(bom.cnt-90)*5;//画面の明るさ設定(明るく)
-        if(bom.cnt>130){
-            bom.flag=0;
-            bright_set.brt=255;
-        }
-    }
+
+	switch (FLAG_SINGLE_DOUBLE)
+	{
+	case 1:
+		if (bom.flag == 1) {
+			if (bom.cnt % 10 == 0) {//1/6秒に１回
+				n = (bom.cnt / 10);
+				if (n<4 && (k = search_effect()) != -1) {
+					effect[k].flag = 1;
+					effect[k].cnt = 0;
+					effect[k].knd = 1;//エフェクト番号１：ボムのエフェクト
+					effect[k].brt = 0;
+					effect[k].ang = rang(PI);//画像の向きはランダム
+					effect[k].mvang = shot_angle[n] - PI / 4;//飛ぶ方向
+					effect[k].spd = 13 + rang(2);//スピード
+					effect[k].r = 0.5;//大きさ
+					effect[k].eff = 2;//αブレンド
+					effect[k].img = img_eff_bom[(bom.cnt / 10) / 3];//画像
+					effect[k].x = ch[i_char].x;//座標
+					effect[k].y = ch[i_char].y;
+				}
+			}
+			bom.cnt++;
+			if (bom.cnt<40)
+				bright_set.brt = 255 - bom.cnt * 5;//画面の明るさ設定(暗く)
+			if (bom.cnt>90)
+				bright_set.brt = 255 - 40 * 5 + (bom.cnt - 90) * 5;//画面の明るさ設定(明るく)
+			if (bom.cnt>130) {
+				bom.flag = 0;
+				bright_set.brt = 255;
+			}
+		}
+		break;
+	case 2:
+		for (i_char = 0; i_char < game_player_num; i_char++)
+		{
+			if (bom.flag == 1) {
+				if (bom.cnt % 10 == 0) {//1/6秒に１回
+					n = (bom.cnt / 10);
+					if (n<4 && (k = search_effect()) != -1) {
+						effect[k].flag = 1;
+						effect[k].cnt = 0;
+						effect[k].knd = 1;//エフェクト番号１：ボムのエフェクト
+						effect[k].brt = 0;
+						effect[k].ang = rang(PI);//画像の向きはランダム
+						effect[k].mvang = shot_angle[n] - PI / 4;//飛ぶ方向
+						effect[k].spd = 13 + rang(2);//スピード
+						effect[k].r = 0.5;//大きさ
+						effect[k].eff = 2;//αブレンド
+						effect[k].img = img_eff_bom[(bom.cnt / 10) / 3];//画像
+						effect[k].x = ch[i_char].x;//座標
+						effect[k].y = ch[i_char].y;
+					}
+				}
+				bom.cnt++;
+				if (bom.cnt<40)
+					bright_set.brt = 255 - bom.cnt * 5;//画面の明るさ設定(暗く)
+				if (bom.cnt>90)
+					bright_set.brt = 255 - 40 * 5 + (bom.cnt - 90) * 5;//画面の明るさ設定(明るく)
+				if (bom.cnt>130) {
+					bom.flag = 0;
+					bright_set.brt = 255;
+				}
+			}
+		}
+		break;
+	}
+
+
+   
 }
 
 
 void enter_crybom_effect(){
     int k;
-    if(ch[i_char].flag==1){
-        if(ch[i_char].cnt%2==0){
-            if((k=search_effect())!=-1){
-                effect[k].flag=1;
-                effect[k].cnt=0;
-                effect[k].knd=4;//喰らいボムエフェクト
-                effect[k].brt=255;
-                effect[k].ang=rang(PI);
-                effect[k].spd=0;
-                effect[k].r=0;
-                effect[k].eff=2;
-                effect[k].img=img_del_effect[GetRand(4)];
-                effect[k].x=ch[i_char].x;
-                effect[k].y=ch[i_char].y;
-            }
-        }
-    }
+
+	switch (FLAG_SINGLE_DOUBLE)
+	{
+	case 1:
+		i_char = 0;
+		if (ch[i_char].flag == 1) {
+			if (ch[i_char].cnt % 2 == 0) {
+				if ((k = search_effect()) != -1) {
+					effect[k].flag = 1;
+					effect[k].cnt = 0;
+					effect[k].knd = 4;//喰らいボムエフェクト
+					effect[k].brt = 255;
+					effect[k].ang = rang(PI);
+					effect[k].spd = 0;
+					effect[k].r = 0;
+					effect[k].eff = 2;
+					effect[k].img = img_del_effect[GetRand(4)];
+					effect[k].x = ch[i_char].x;
+					effect[k].y = ch[i_char].y;
+				}
+			}
+		}
+		break;
+	case 2:
+		for (i_char = 0; i_char < game_player_num; i_char++)
+		{
+			if (ch[i_char].flag == 1) {
+				if (ch[i_char].cnt % 2 == 0) {
+					if ((k = search_effect()) != -1) {
+						effect[k].flag = 1;
+						effect[k].cnt = 0;
+						effect[k].knd = 4;//喰らいボムエフェクト
+						effect[k].brt = 255;
+						effect[k].ang = rang(PI);
+						effect[k].spd = 0;
+						effect[k].r = 0;
+						effect[k].eff = 2;
+						effect[k].img = img_del_effect[GetRand(4)];
+						effect[k].x = ch[i_char].x;
+						effect[k].y = ch[i_char].y;
+					}
+				}
+			}
+		}
+		break;
+	}
+   
 }
 
 void calc_child(){
