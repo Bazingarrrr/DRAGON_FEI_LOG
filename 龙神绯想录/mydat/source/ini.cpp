@@ -6,17 +6,36 @@ void input_bullet_info(bullet_info_t *binfo,int size_x,int size_y,int col_num,do
 	binfo->kaiten=kaiten;
 }
 
-//一番最初の初期化
+//ﾉ雜ｨｽﾇﾉｫｵﾄｳｼﾎｻﾖﾃ
 void first_ini(){
-	configpad[i_char].down=0;
-	configpad[i_char].left=1;
-	configpad[i_char].right=2;
-	configpad[i_char].up=3;
-	configpad[i_char].bom=4;
-	configpad[i_char].shot=5;
-	configpad[i_char].slow=11;
-	configpad[i_char].start=13;
-	configpad[i_char].change=6;
+	 int i_char = 0;
+	 switch (FLAG_SINGLE_DOUBLE)
+	 {
+	 case 1:
+		 configpad[i_char].down = 0;
+		 configpad[i_char].left = 1;
+		 configpad[i_char].right = 2;
+		 configpad[i_char].up = 3;
+		 configpad[i_char].bom = 4;
+		 configpad[i_char].shot = 5;
+		 configpad[i_char].slow = 11;
+		 configpad[i_char].start = 13;
+		 configpad[i_char].change = 6;
+	 case 2:
+		 for (i_char = 0; i_char < game_player_num; i_char++)
+		 {
+			 configpad[i_char].down = 0;
+			 configpad[i_char].left = 1;
+			 configpad[i_char].right = 2;
+			 configpad[i_char].up = 3;
+			 configpad[i_char].bom = 4;
+			 configpad[i_char].shot = 5;
+			 configpad[i_char].slow = 11;
+			 configpad[i_char].start = 13;
+			 configpad[i_char].change = 6;
+
+		 }
+	 }
 
 	stage=0;
 	stage_title_count[0]=200;
@@ -65,10 +84,30 @@ void ini(){
 	memset(&area,0,sizeof(area_t));//(48)
 	memset(option_bb,0,sizeof(option_bb_t)*2);//(49)
 
-	ch[i_char].x=FMX/2;
-	ch[i_char].y=FMY*3/4;
-	ch[i_char].power=400;//初期パワー(41)
-	ch[i_char].num=5;//初期残機数(41)
+	switch (FLAG_SINGLE_DOUBLE)
+	{
+	case 1:
+		ch[i_char].x = FMX / 2;
+		ch[i_char].y = FMY * 3 / 4;
+		ch[i_char].power = 400;//初期パワー(41)
+		ch[i_char].num = 5;//初期残機数(41)
+	case 2:
+		
+		for (i_char = 0; i_char < game_player_num; i_char++)
+		{
+			ch[i_char].x = (FMX + 5*i_char) / 2;
+			ch[i_char].y = (FMY * 3 - 500*i_char) / 4;
+			ch[i_char].power = 400;//初期パワー(41)
+			ch[i_char].num = 5;//初期残機数(41)
+		}
+		
+		
+
+	}
+	
+
+
+		
 
 	stage_title.appear_cnt=stage_title_count[stage];
 	

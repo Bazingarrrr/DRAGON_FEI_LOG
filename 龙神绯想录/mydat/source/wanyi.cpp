@@ -5,6 +5,7 @@ extern int FLAG_MODE;
 
 
 void menu()
+
 {
 	FLAG_SINGLE_DOUBLE = 1;
 	initgraph(1280, 720);
