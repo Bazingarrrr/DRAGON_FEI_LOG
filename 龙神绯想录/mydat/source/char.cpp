@@ -40,38 +40,89 @@ void ch_move(){
     int i,sayu_flag=0,joge_flag=0;
     double x,y,mx,my,naname=1;
     double move_x[4]={-4.0,4.0,0,0},move_y[4]={0,0,4.0,-4.0};
-    int inputpad[4];
-    inputpad[0]=CheckStatePad(configpad[i_char].left); inputpad[1]=CheckStatePad(configpad[i_char].right);
-    inputpad[2]=CheckStatePad(configpad[i_char].down); inputpad[3]=CheckStatePad(configpad[i_char].up);
 
-    if(ch[i_char].flag==1)return;//喰らいボム受付中は動かせない
+	switch (FLAG_SINGLE_DOUBLE)
+	{
+	case 1:
+		int inputpad[4];
+		inputpad[0] = CheckStatePad(configpad[i_char].left); inputpad[1] = CheckStatePad(configpad[i_char].right);
+		inputpad[2] = CheckStatePad(configpad[i_char].down); inputpad[3] = CheckStatePad(configpad[i_char].up);
 
-    if(CheckStatePad(configpad[i_char].left)>0)//左キーが押されていたら
-        ch[i_char].img+=4*2;//画像を左向きに
-    else if(CheckStatePad(configpad[i_char].right)>0)//右キーが押されていたら
-        ch[i_char].img+=4*1;//画像を右向きに
+		if (ch[i_char].flag == 1)return;//喰らいボム受付中は動かせない
 
-    for(i=0;i<2;i++)//左右分
-        if(inputpad[i]>0)//左右どちらかの入力があれば
-            sayu_flag=1;//左右入力フラグを立てる
-    for(i=2;i<4;i++)//上下分
-        if(inputpad[i]>0)//上下どちらかの入力があれば
-            joge_flag=1;//上下入力フラグを立てる
-    if(sayu_flag==1 && joge_flag==1)//左右、上下両方の入力があれば斜めだと言う事
-        naname=sqrt(2.0);//移動スピードを1/ルート2に
+		if (CheckStatePad(configpad[i_char].left)>0)//左キーが押されていたら
+			ch[i_char].img += 4 * 2;//画像を左向きに
+		else if (CheckStatePad(configpad[i_char].right)>0)//右キーが押されていたら
+			ch[i_char].img += 4 * 1;//画像を右向きに
 
-    for(int i=0;i<4;i++){//4方向分ループ
-        if(inputpad[i]>0){//i方向のキーボード、パッドどちらかの入力があれば
-            x=ch[i_char].x , y=ch[i_char].y;//今の座標をとりあえずx,yに格納
-            mx=move_x[i];    my=move_y[i];//移動分をmx,myに代入
-            if(CheckStatePad(configpad[i_char].slow)>0){//低速移動なら
-                mx=move_x[i]/3;    my=move_y[i]/3;//移動スピードを1/3に
-            }
-            x+=mx/naname , y+=my/naname;//今の座標と移動分を足す
-            if(!(x<10 || x>FMX-10 || y<5 || y>FMY-5)){//計算結果移動可能範囲内なら
-                ch[i_char].x=x , ch[i_char].y=y;//実際に移動させる
-            }
-        }
-    }
+		for (i = 0; i<2; i++)//左右分
+			if (inputpad[i]>0)//左右どちらかの入力があれば
+				sayu_flag = 1;//左右入力フラグを立てる
+		for (i = 2; i<4; i++)//上下分
+			if (inputpad[i]>0)//上下どちらかの入力があれば
+				joge_flag = 1;//上下入力フラグを立てる
+		if (sayu_flag == 1 && joge_flag == 1)//左右、上下両方の入力があれば斜めだと言う事
+			naname = sqrt(2.0);//移動スピードを1/ルート2に
+
+		for (int i = 0; i<4; i++) {//4方向分ループ
+			if (inputpad[i]>0) {//i方向のキーボード、パッドどちらかの入力があれば
+				x = ch[i_char].x, y = ch[i_char].y;//今の座標をとりあえずx,yに格納
+				mx = move_x[i];    my = move_y[i];//移動分をmx,myに代入
+				if (CheckStatePad(configpad[i_char].slow)>0) {//低速移動なら
+					mx = move_x[i] / 3;    my = move_y[i] / 3;//移動スピードを1/3に
+				}
+				x += mx / naname, y += my / naname;//今の座標と移動分を足す
+				if (!(x<10 || x>FMX - 10 || y<5 || y>FMY - 5)) {//計算結果移動可能範囲内なら
+					ch[i_char].x = x, ch[i_char].y = y;//実際に移動させる
+				}
+			}
+		}
+		break;
+	case 2:
+		int inputpad_2[2][4];
+		for (i_char = 0; i_char < game_player_num; i_char++)
+		{
+			inputpad_2[0][0] = CheckStatePad(configpad[i_char].left); inputpad_2[0][1] = CheckStatePad(configpad[i_char].right);
+			inputpad_2[i_char][2] = CheckStatePad(configpad[i_char].down); inputpad_2[i_char][3] = CheckStatePad(configpad[i_char].up);
+		}
+		/*
+		for (i_char = 0; i_char < game_player_num; i_char++)
+			if (ch[i_char].flag == 1)return;//喰らいボム受付中は動かせない
+
+		for (i_char = 0; i_char < game_player_num; i_char++)
+			if (CheckStatePad(configpad[i_char].left)>0)//左キーが押されていたら
+				ch[i_char].img += 4 * 2;//画像を左向きに
+			else if (CheckStatePad(configpad[i_char].right)>0)//右キーが押されていたら
+				ch[i_char].img += 4 * 1;//画像を右向きに
+
+		for (i = 0; i<2; i++)//左右分
+			if (inputpad[i]>0)//左右どちらかの入力があれば
+				sayu_flag = 1;//左右入力フラグを立てる
+		for (i = 2; i<4; i++)//上下分
+			if (inputpad[i]>0)//上下どちらかの入力があれば
+				joge_flag = 1;//上下入力フラグを立てる
+		if (sayu_flag == 1 && joge_flag == 1)//左右、上下両方の入力があれば斜めだと言う事
+			naname = sqrt(2.0);//移動スピードを1/ルート2に
+		*/
+		
+		for (i_char = 0; i_char < game_player_num; i_char++)
+		{
+			for (int i = 0; i < 4; i++) //ﾉ靹ﾃﾋﾄｸｽﾏﾏｵﾄﾒﾆｶｯｷﾖﾁｿ
+			{
+				if (inputpad_2[i_char][i] > 0) {//i方向のキーボード、パッドどちらかの入力があれば
+					x = ch[i_char].x, y = ch[i_char].y;//今の座標をとりあえずx,yに格納
+					mx = move_x[i];    my = move_y[i];//移動分をmx,myに代入
+					if (CheckStatePad(configpad[i_char].slow) > 0) {//低速移動なら
+						mx = move_x[i] / 3;    my = move_y[i] / 3;//移動スピードを1/3に
+					}
+					x += mx / naname, y += my / naname;//今の座標と移動分を足す
+					if (!(x<10 || x>FMX - 10 || y<5 || y>FMY - 5)) {//ﾈ郢釞ﾆﾋ羶盪鋕ﾚｿﾉﾒﾆｶｯｷｶﾎｧﾄﾚ
+						ch[i_char].x = x, ch[i_char].y = y;//ｽﾐﾊｵｼﾊｵﾄﾒﾆｶｯ
+					}
+				}
+			}
+		}
+	}
+    
 }
 

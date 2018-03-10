@@ -91,6 +91,7 @@ void ini(){
 		ch[i_char].y = FMY * 3 / 4;
 		ch[i_char].power = 400;//初期パワー(41)
 		ch[i_char].num = 5;//初期残機数(41)
+		break;
 	case 2:
 		
 		for (i_char = 0; i_char < game_player_num; i_char++)
@@ -100,6 +101,7 @@ void ini(){
 			ch[i_char].power = 400;//初期パワー(41)
 			ch[i_char].num = 5;//初期残機数(41)
 		}
+		break;
 		
 		
 
