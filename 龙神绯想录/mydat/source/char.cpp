@@ -82,9 +82,9 @@ void ch_move(){
 		int inputpad_2[2][4];
 		for (i_char = 0; i_char < game_player_num; i_char++)
 		{
-			inputpad_2[0][0] = CheckStatePad(configpad[i_char].left); inputpad_2[0][1] = CheckStatePad(configpad[i_char].right);
+			inputpad_2[i_char][0] = CheckStatePad(configpad[i_char].left); inputpad_2[i_char][1] = CheckStatePad(configpad[i_char].right);
 			inputpad_2[i_char][2] = CheckStatePad(configpad[i_char].down); inputpad_2[i_char][3] = CheckStatePad(configpad[i_char].up);
-		}
+		
 		/*
 		for (i_char = 0; i_char < game_player_num; i_char++)
 			if (ch[i_char].flag == 1)return;//喰らいボム受付中は動かせない
@@ -105,8 +105,8 @@ void ch_move(){
 			naname = sqrt(2.0);//移動スピードを1/ルート2に
 		*/
 		
-		for (i_char = 0; i_char < game_player_num; i_char++)
-		{
+		
+		
 			for (int i = 0; i < 4; i++) //ﾉ靹ﾃﾋﾄｸｽﾏﾏｵﾄﾒﾆｶｯｷﾖﾁｿ
 			{
 				if (inputpad_2[i_char][i] > 0) {//i方向のキーボード、パッドどちらかの入力があれば

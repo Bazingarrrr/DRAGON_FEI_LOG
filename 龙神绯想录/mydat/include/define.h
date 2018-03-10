@@ -15,7 +15,7 @@
 #define SE_MAX 100
 
 //パッドキーの最大数
-#define PAD_MAX 16
+#define PAD_MAX 1000
 
 //敵の同時表示最大数
 #define ENEMY_MAX 30
